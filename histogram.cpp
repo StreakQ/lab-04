@@ -89,6 +89,13 @@ size_t write_data(void* items, size_t item_size, size_t item_count, void* ctx)
     buffer->write(reinterpret_cast<const char*>(items), data_size);
     return data_size;
 }
+string make_info_text()
+{
+    stringstream buffer;
+    // TODO: получить версию системы, записать в буфер.
+    // TODO: получить имя компьютера, записать в буфер.
+    return buffer.str();
+}
 vector<double> make_histogram(Input data)
 {
 
