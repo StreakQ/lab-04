@@ -92,8 +92,25 @@ size_t write_data(void* items, size_t item_size, size_t item_count, void* ctx)
 string make_info_text()
 {
     stringstream buffer;
-    // TODO: получить версию системы, записать в буфер.
-    // TODO: получить имя компьютера, записать в буфер.
+    DWORD info = GetVersion();
+    DWORD mask = 0x0000ffff;
+    DWORD version = info & mask;
+    DWORD platform = info >> 16;
+    DWORD mask_2 = 0x0000ff;
+    if ((info & 0x80000000) == 0)
+    {
+        DWORD version_major = version & mask_2;
+        DWORD version_minor = version >> 8;
+        DWORD build = platform;
+        buffer << "Windows v"<<version_major<<"."<<version_minor<<"(build "<<build<<")"<<'\n';
+
+    }
+    char comp_name[MAX_COMPUTERNAME_LENGTH + 1];
+    GetSystemDirectory(comp_name, MAX_PATH);
+    printf("System directory: %s", comp_name);
+    DWORD size = MAX_COMPUTERNAME_LENGTH+1;
+    GetComputerNameA(comp_name, &size);
+    buffer<<"Computer name:" <<comp_name;
     return buffer.str();
 }
 vector<double> make_histogram(Input data)
@@ -211,7 +228,7 @@ void svg_rect(double x, double y, double width, double height, string stroke, st
 
 void show_histogram_svg( const vector<double>& bins,double bin_size,string option_value)
 {
-    const auto IMAGE_WIDTH = 400;
+    const auto IMAGE_WIDTH = 500;
     const auto IMAGE_HEIGHT = 300;
     const auto TEXT_LEFT = 20;
     const auto TEXT_BASELINE = 20;
@@ -262,8 +279,8 @@ void show_histogram_svg( const vector<double>& bins,double bin_size,string optio
         top += BIN_HEIGHT;
         top_sign += BIN_HEIGHT;
         val_sign = val_sign + bin_size;
-
     }
+    svg_text(0,top + TEXT_BASELINE + top_sign, make_info_text());
 
     svg_end();
 }

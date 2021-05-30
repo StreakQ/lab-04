@@ -5,17 +5,14 @@
 #include <math.h>
 #include <string>
 #include <sstream>
+#include <windows.h>
 
 using namespace std;
 
 int
 main(int argc, char* argv[])
 {
-    const char* name = "Commander Shepard";
-    int year = 2154;
-    printf("%s was born in %d.\n", name, year);
-    printf("n = %08x\n", 0x1234567);
-    return 0;
+
     Input input;
     string option_value;
 
