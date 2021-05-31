@@ -103,7 +103,7 @@ string make_info_text()
         DWORD version_minor = version >> 8;
         DWORD build = platform;
         buffer << "Windows v"<<version_major<<"."<<version_minor<<"(build "<<build<<")"<<'\n';
-
+//
     }
     char comp_name[MAX_COMPUTERNAME_LENGTH + 1];
     GetSystemDirectory(comp_name, MAX_PATH);
