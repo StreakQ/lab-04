@@ -20,6 +20,7 @@ main(int argc, char* argv[])
     {
         if(argv[3]== NULL)
         {
+
             cerr<<"after -fill you need to put one more argument";
             exit(1);
         }
@@ -28,6 +29,7 @@ main(int argc, char* argv[])
             input = download(argv[1]);
             option_value =argv[3];
         }
+
         if(string(argv[1])=="-fill")
         {
             if(strstr(argv[2],"http://")== 0)
@@ -42,10 +44,13 @@ main(int argc, char* argv[])
             }
         }
     }
+
     else
     {
         input = read_input(cin,false);
     }
+
+
     const auto bins = make_histogram(input);
     auto bin_size = fun_sign(input);
     show_histogram_svg(bins,bin_size,option_value);
