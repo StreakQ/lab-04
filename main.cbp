@@ -12,8 +12,15 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-std=c++17" />
 					<Add option="-g" />
+					<Add directory="curl/include" />
 				</Compiler>
+				<Linker>
+					<Add option="-static" />
+					<Add library="libcurl.dll.a" />
+					<Add directory="curl/lib" />
+				</Linker>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/main" prefix_auto="1" extension_auto="1" />
@@ -31,20 +38,22 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
+			<Add option="-DCURL_STATICLIB" />
 			<Add directory="curl/include" />
 		</Compiler>
 		<Linker>
 			<Add library="libcurl.dll.a" />
 			<Add directory="curl/lib" />
 		</Linker>
-		<Unit filename=".gitignore" />
+		<Unit filename=".gitignore">
+			<Option target="Release" />
+		</Unit>
 		<Unit filename="histogram.cpp" />
-		<Unit filename="histogram.h" />
+		<Unit filename="histogram.h">
+			<Option target="Release" />
+		</Unit>
 		<Unit filename="main.cpp" />
 		<Extensions>
-			<code_completion />
-			<envvars />
-			<debugger />
 			<lib_finder disable_auto="1" />
 		</Extensions>
 	</Project>
